@@ -3,14 +3,15 @@ import json
 from src import db
 
 
-customers = Blueprint('customers', __name__)
+customers = Blueprint('actors', __name__)
 
 # Get all customers from the DB
-@customers.route('/customers', methods=['GET'])
-def get_customers():
+@customers.route('/roles', methods=['GET'])
+def get_roles():
     cursor = db.get_db().cursor()
-    cursor.execute('select customerNumber, customerName,\
-        creditLimit from customers')
+    # status attritube of role is not in the example data
+    cursor.execute('select r.role_id,p.title,r.role_type,r.char_name,r.description,r.age_range,r.gender,\
+        from role r join projects p on r.projectid = p.p_id')
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -21,11 +22,15 @@ def get_customers():
     the_response.mimetype = 'application/json'
     return the_response
 
-# Get customer detail for customer with particular userID
-@customers.route('/customers/<userID>', methods=['GET'])
-def get_customer(userID):
+# Get customer detail for customer with particular actor_id
+@customers.route('/applications/<actorID>', methods=['GET'])
+def get_applications(actorID):
     cursor = db.get_db().cursor()
-    cursor.execute('select * from customers where customerNumber = {0}'.format(userID))
+    
+    #project_id, role_id, actor_id, resume, status
+    cursor.execute('select p.title, r.char_name, a.submit_time \
+        from application a join role r on a.role_id = r.role_id  \
+            join projects p on p.p_id = a.project_id where a.status = "true" actor_id = {0}'.format(actorID))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
