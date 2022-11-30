@@ -1,7 +1,5 @@
 CREATE DATABASE cs3200proj;
 
-CREATE USER 'webapp'@'*' IDENTIFIED BY 'gohuskies123';
-
 GRANT ALL PRIVILEGES ON cs3200proj.* TO 'webapp'@'*';
 
 FLUSH PRIVILEGES;
