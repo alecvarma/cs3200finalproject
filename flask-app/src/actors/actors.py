@@ -22,7 +22,7 @@ def get_roles():
     the_response.mimetype = 'application/json'
     return the_response
 
-# Get customer detail for customer with particular actor_id
+# Get application details for actor with particular actor_id
 @actors.route('/applications/<actorID>', methods=['GET'])
 def get_applications(actorID):
     cursor = db.get_db().cursor()
@@ -39,3 +39,12 @@ def get_applications(actorID):
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
+
+# Get application details for actor with particular actor_id
+@actors.route('/applications', methods=['Post'])
+def post_application():
+    from_page = request.form
+    cursor = db.get_db().cursor()
+    #project_id, role_id, actor_id, resume, status
+    cursor.execute('insert into Role ... ')
+    return f"Applied to Role {from_page['char_name']}"
