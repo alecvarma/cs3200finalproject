@@ -7,14 +7,14 @@ FLUSH PRIVILEGES;
 USE cs3200proj;
 
 CREATE TABLE Adm(
-    admin_id INTEGER PRIMARY KEY NOT NULL,
+    admin_id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
     loc TEXT
 );
 
 CREATE TABLE Actor(
-    actor_id INTEGER PRIMARY KEY NOT NULL,
+    actor_id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
     DOB DATE NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE Actor(
 );
 
 CREATE TABLE Director(
-    dir_id INTEGER PRIMARY KEY NOT NULL,
+    dir_id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
     DOB DATE NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE Director(
 );
 
 CREATE TABLE Project(
-    p_id INTEGER PRIMARY KEY NOT NULL,
+    p_id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
     title VARCHAR(50) NOT NULL,
     type VARCHAR(30) NOT NULL,
     cast INTEGER,
@@ -51,7 +51,7 @@ CREATE TABLE Project(
 );
 
 CREATE TABLE Role(
-    role_id INTEGER NOT NULL,
+    role_id INTEGER NOT NULL AUTO_INCREMENT,
     projectid INTEGER NOT NULL,
     primary key (role_id, projectid),
     role_type VARCHAR(50) NOT NULL,

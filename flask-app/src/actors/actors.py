@@ -29,7 +29,7 @@ def get_applications(actorID):
     #project_id, role_id, actor_id, resume, status
     cursor.execute('select p.title, r.char_name, a.submit_time \
         from application a join role r on a.role_id = r.role_id  \
-            join projects p on p.p_id = a.project_id where a.status = "true" actor_id = {0}'.format(actorID))
+            join projects p on p.p_id = a.project_id where a.status = "true" and actor_id = {0}'.format(actorID))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
