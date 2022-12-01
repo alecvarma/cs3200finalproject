@@ -3,10 +3,10 @@ import json
 from src import db
 
 
-customers = Blueprint('actors', __name__)
+actors = Blueprint('actors', __name__)
 
 # Get all customers from the DB
-@customers.route('/roles', methods=['GET'])
+@actors.route('/roles', methods=['GET'])
 def get_roles():
     cursor = db.get_db().cursor()
     # status attritube of role is not in the example data
@@ -23,10 +23,9 @@ def get_roles():
     return the_response
 
 # Get customer detail for customer with particular actor_id
-@customers.route('/applications/<actorID>', methods=['GET'])
+@actors.route('/applications/<actorID>', methods=['GET'])
 def get_applications(actorID):
     cursor = db.get_db().cursor()
-    
     #project_id, role_id, actor_id, resume, status
     cursor.execute('select p.title, r.char_name, a.submit_time \
         from application a join role r on a.role_id = r.role_id  \
