@@ -40,7 +40,7 @@ def get_applications(actorID):
     the_response.mimetype = 'application/json'
     return the_response
 
-# Get application details for actor with particular actor_id
+# Post application data for a particular role
 @actors.route('/applications', methods=['Post'])
 def post_application():
     from_page = request.form
@@ -48,3 +48,22 @@ def post_application():
     #project_id, role_id, actor_id, resume, status
     cursor.execute('insert into Role ... ')
     return f"Applied to Role {from_page['char_name']}"
+
+# Get reviews for an actor with a particular actor_id
+@actors.route('/reviews/<actorID>', methods=['GET'])
+def get_reviews(actorID):
+    cursor = db.get_db().cursor()
+    #project_id, role_id, actor_id, resume, status
+    cursor.execute('select r.rating, d.first_name, d.last_name, r.description \
+        from reviews r join director d on r.dir_id = d.dir_id where actor_id = {0}'.format(actorID))
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+
