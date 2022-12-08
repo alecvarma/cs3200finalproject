@@ -1,6 +1,6 @@
 CREATE DATABASE cs3200proj;
 
-GRANT ALL PRIVILEGES ON cs3200proj.* TO 'webapp'@'%';
+grant all privileges ON cs3200proj.* TO 'webapp'@'%';
 
 FLUSH PRIVILEGES;
 
