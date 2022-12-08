@@ -10,7 +10,7 @@ actors = Blueprint('actors', __name__)
 def get_roles():
     cursor = db.get_db().cursor()
     # status attritube of role is not in the example data
-    cursor.execute('select r.role_id,p.title,r.role_type,r.char_name,r.description,r.age_range,r.gender,\
+    cursor.execute('select r.role_id,p.title,r.role_type,r.char_name,r.description,r.age_range,r.gender\
         from role r join projects p on r.projectid = p.p_id')
     row_headers = [x[0] for x in cursor.description]
     json_data = []
