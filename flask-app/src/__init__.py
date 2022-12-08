@@ -27,11 +27,13 @@ def create_app():
     # Import the various routes
     from src.views import views
     from src.actors.actors import actors
+    from src.directors.directors import directors
     from src.products.products  import products
 
     # Register the routes that we just imported so they can be properly handled
     app.register_blueprint(views,       url_prefix='/classic')
     app.register_blueprint(actors,   url_prefix='/actors')
+    app.register_blueprint(directors, url_prefix='/directors')
     app.register_blueprint(products,    url_prefix='/classic')
 
     return app

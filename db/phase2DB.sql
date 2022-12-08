@@ -1,6 +1,6 @@
 CREATE DATABASE cs3200proj;
 
-GRANT ALL PRIVILEGES ON cs3200proj.* TO 'webapp'@'*';
+GRANT ALL PRIVILEGES ON cs3200proj.* TO 'webapp'@'%';
 
 FLUSH PRIVILEGES;
 
@@ -29,7 +29,7 @@ CREATE TABLE Director(
     last_name VARCHAR(30) NOT NULL,
     DOB DATE NOT NULL,
     fav_genre VARCHAR(50),
-    cur_project VARCHAR(50),
+    cur_project VARCHAR(75),
     admin_id INTEGER NOT NULL,
     CONSTRAINT fk_2 
         FOREIGN KEY (admin_id) REFERENCES Adm (admin_id)
@@ -37,7 +37,7 @@ CREATE TABLE Director(
 
 CREATE TABLE Project(
     p_id INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    title VARCHAR(50) NOT NULL,
+    title VARCHAR(100) NOT NULL,
     type VARCHAR(30) NOT NULL,
     cast INTEGER,
     country VARCHAR(50) NOT NULL,
@@ -226,125 +226,48 @@ values
 INSERT INTO Director
     (dir_id,first_name,last_name,DOB,fav_genre,cur_project,admin_id)
 values
-    (1, 'Lemar', 'Ixer', '9/12/1943', 'Action|Comedy|Horror|Thriller', 'Snakes on a Plane', 4),
-    (2, 'Charlotte', 'Carnall', '3/10/1990', 'Documentary', 'ReGeneration', 16),
-    (3, 'Wright', 'Gawen', '10/1/1948', 'Documentary', 'Cartoonist: Jeff Smith, BONE and the Changing Face of Comics, The', 3),
-    (4, 'Tasha', 'Delve', '11/21/1957', 'Animation|Comedy|Musical', 'Eight Crazy Nights (Adam Sandler''s Eight Crazy Nights)', 13),
-    (5, 'Melvin', 'Heliar', '9/16/1987', 'Comedy', 'Blackadder''s Christmas Carol', 16),
-    (6, 'Herby', 'Le Surf', '5/5/1969', 'Comedy|Drama', 'Crimes of the Heart', 12),
-    (7, 'Cahra', 'Rankling', '3/29/1975', 'Western', 'Navajo Joe', 7),
-    (8, 'Broddie', 'Dimitrie', '4/3/1947', 'Comedy', 'Fly Away (Bis zum Horizont, dann links!)', 2),
-    (9, 'Nicola', 'Faulkener', '1/21/1999', 'Documentary', 'Kimjongilia', 9),
-    (10, 'Nestor', 'MacSkeagan', '12/27/1959', 'Drama', 'Unvanquished, The (Aparajito)', 4),
-    (11, 'Abel', 'Strettell', '8/5/1958', 'Comedy', 'Love Punch, The', 9),
-    (12, 'Jdavie', 'Elacoate', '5/9/1968', 'Crime|Drama|Thriller', 'Bordertown', 16),
-    (13, 'Jenna', 'Layhe', '3/18/1979', 'Comedy|Romance', 'Exit Smiling', 11),
-    (14, 'Nicolette', 'Ridulfo', '5/20/1988', 'Comedy|Romance', 'Prince & Me II: The Royal Wedding, The', 9),
-    (15, 'Levin', 'Costelloe', '8/7/1951', 'Action|Sci-Fi|Thriller', 'Virtuosity', 5),
-    (16, 'Ximenes', 'Medford', '1/28/1940', 'Drama', 'Hideous Kinky', 16),
-    (17, 'Agnese', 'Studders', '8/13/1962', 'Horror', 'Luther the Geek', 6),
-    (18, 'Skipton', 'Eckley', '9/22/1947', 'Action|Crime|Drama|Horror|Thriller', 'Possessed (Besat)', 4),
-    (19, 'Britt', 'Blaszczynski', '3/16/1983', 'Action', 'Desert Heat (Inferno)', 17),
-    (20, 'Quinton', 'Payton', '9/23/1945', 'Comedy', 'Iron Ladies, The (Satree lek)', 15),
-    (21, 'Aloin', 'Keoghan', '10/18/1982', 'Animation', 'Mail Early for Xmas', 20),
-    (22, 'Ileana', 'Tschersich', '10/11/1993', 'Documentary', 'Valentine Road', 19),
-    (23, 'Rogers', 'Hebbard', '7/15/1958', 'Animation|War', 'When the Wind Blows', 9),
-    (24, 'Chelsie', 'Haughian', '4/8/1979', 'Drama', 'Foxfire', 2),
-    (25, 'Allyn', 'Siddon', '7/5/1986', 'Action|Crime|Sci-Fi|IMAX', 'RoboCop', 5),
-    (26, 'Enoch', 'Lace', '12/27/1970', 'Adventure|Drama|Fantasy|Romance|IMAX', 'Twilight Saga: Breaking Dawn - Part 2, The', 15),
-    (27, 'Chaunce', 'Parramore', '2/11/1971', 'Adventure|Children|Comedy', 'Around the World in 80 Days', 2),
-    (28, 'Hewitt', 'Bummfrey', '4/9/1979', 'Comedy', 'The Fuller Brush Girl', 18),
-    (29, 'Keefer', 'Pleasance', '12/17/1988', 'Drama|Mystery|Sci-Fi', 'Stalker', 2),
-    (30, 'Sanderson', 'Anglim', '12/2/1974', 'Action|Sci-Fi', 'Godzilla vs. Megalon (Gojira tai Megaro)', 19),
-    (31, 'Lidia', 'Connell', '3/25/1960', 'Action|Comedy', 'Man of the House', 18),
-    (32, 'Rachele', 'Hurford', '7/14/1959', 'Documentary|Musical', 'Young at Heart (a.k.a. Young@Heart)', 2),
-    (33, 'Starla', 'Plumridge', '4/22/1960', 'Drama', 'Pumpkin Eater, The', 16),
-    (34, 'Britte', 'Gussin', '3/5/1954', 'Action|Crime|Drama|Mystery|Thriller', 'Double, The', 20),
-    (35, 'Winna', 'Winspurr', '6/25/1946', 'Drama', 'Felicity', 13),
-    (36, 'Shelby', 'Gwyn', '4/19/1981', 'Action|Sci-Fi', 'Space Amoeba (Yog: Monster from Space)', 17),
-    (37, 'Isis', 'Raubenheim', '10/11/1980', 'Western', 'American Bandits: Frank and Jesse James', 10),
-    (38, 'Tera', 'Sego', '3/25/1950', 'Action|Adventure|Sci-Fi', 'Hulk', 3),
-    (39, 'Leonanie', 'Edgars', '7/4/1958', 'Documentary', 'Home Movie', 11),
-    (40, 'Cary', 'Collough', '8/7/1983', 'Mystery', 'The Sign of Four: Sherlock Holmes'' Greatest Case', 1);
+    (1, 'Lemar', 'Ixer', '1943-09-12', 'Action|Comedy|Horror|Thriller', 'Snakes on a Plane', 4),
+    (2, 'Charlotte', 'Carnall', '1990-03-10', 'Documentary', 'ReGeneration', 16),
+    (3, 'Wright', 'Gawen', '1948-10-01', 'Documentary', 'Cartoonist: Jeff Smith, BONE and the Changing Face of Comics, The', 3),
+    (4, 'Tasha', 'Delve', '1957-11-21', 'Animation|Comedy|Musical', 'Eight Crazy Nights (Adam Sandler''s Eight Crazy Nights)', 13),
+    (5, 'Melvin', 'Heliar', '1987-09-16', 'Comedy', 'Blackadder''s Christmas Carol', 16),
+    (6, 'Herby', 'Le Surf', '1969-05-05', 'Comedy|Drama', 'Crimes of the Heart', 12),
+    (7, 'Cahra', 'Rankling', '1975-03-29', 'Western', 'Navajo Joe', 7),
+    (8, 'Broddie', 'Dimitrie', '1947-04-03', 'Comedy', 'Fly Away (Bis zum Horizont, dann links!)', 2),
+    (9, 'Nicola', 'Faulkener', '1999-01-21', 'Documentary', 'Kimjongilia', 9),
+    (10, 'Nestor', 'MacSkeagan', '1959-12-27', 'Drama', 'Unvanquished, The (Aparajito)', 4),
+    (11, 'Abel', 'Strettell', '1958-08-05', 'Comedy', 'Love Punch, The', 9),
+    (12, 'Jdavie', 'Elacoate', '1968-05-09', 'Crime|Drama|Thriller', 'Bordertown', 16),
+    (13, 'Jenna', 'Layhe', '1979-03-18', 'Comedy|Romance', 'Exit Smiling', 11),
+    (14, 'Nicolette', 'Ridulfo', '1988-05-20', 'Comedy|Romance', 'Prince & Me II: The Royal Wedding, The', 9),
+    (15, 'Levin', 'Costelloe', '1951-08-07', 'Action|Sci-Fi|Thriller', 'Virtuosity', 5),
+    (16, 'Ximenes', 'Medford', '1940-01-28', 'Drama', 'Hideous Kinky', 16),
+    (17, 'Agnese', 'Studders', '1962-08-13', 'Horror', 'Luther the Geek', 6),
+    (18, 'Skipton', 'Eckley', '1947-09-22', 'Action|Crime|Drama|Horror|Thriller', 'Possessed (Besat)', 4),
+    (19, 'Britt', 'Blaszczynski', '1983-03-16', 'Action', 'Desert Heat (Inferno)', 17),
+    (20, 'Quinton', 'Payton', '1945-09-23', 'Comedy', 'Iron Ladies, The (Satree lek)', 15),
+    (21, 'Aloin', 'Keoghan', '1982-10-18', 'Animation', 'Mail Early for Xmas', 20),
+    (22, 'Ileana', 'Tschersich', '1993-10-11', 'Documentary', 'Valentine Road', 19),
+    (23, 'Rogers', 'Hebbard', '1958-07-15', 'Animation|War', 'When the Wind Blows', 9),
+    (24, 'Chelsie', 'Haughian', '1979-04-08', 'Drama', 'Foxfire', 2),
+    (25, 'Allyn', 'Siddon', '1986-07-05', 'Action|Crime|Sci-Fi|IMAX', 'RoboCop', 5),
+    (26, 'Enoch', 'Lace', '1970-12-27', 'Adventure|Drama|Fantasy|Romance|IMAX', 'Twilight Saga: Breaking Dawn - Part 2, The', 15),
+    (27, 'Chaunce', 'Parramore', '1971-02-11', 'Adventure|Children|Comedy', 'Around the World in 80 Days', 2),
+    (28, 'Hewitt', 'Bummfrey', '1979-04-09', 'Comedy', 'The Fuller Brush Girl', 18),
+    (29, 'Keefer', 'Pleasance', '1988-12-17', 'Drama|Mystery|Sci-Fi', 'Stalker', 2),
+    (30, 'Sanderson', 'Anglim', '1974-12-02', 'Action|Sci-Fi', 'Godzilla vs. Megalon (Gojira tai Megaro)', 19),
+    (31, 'Lidia', 'Connell', '1960-03-25', 'Action|Comedy', 'Man of the House', 18),
+    (32, 'Rachele', 'Hurford', '1959-07-14', 'Documentary|Musical', 'Young at Heart (a.k.a. Young@Heart)', 2),
+    (33, 'Starla', 'Plumridge', '1960-04-22', 'Drama', 'Pumpkin Eater, The', 16),
+    (34, 'Britte', 'Gussin', '1954-03-05', 'Action|Crime|Drama|Mystery|Thriller', 'Double, The', 20),
+    (35, 'Winna', 'Winspurr', '1946-06-25', 'Drama', 'Felicity', 13),
+    (36, 'Shelby', 'Gwyn', '1981-04-19', 'Action|Sci-Fi', 'Space Amoeba (Yog: Monster from Space)', 17),
+    (37, 'Isis', 'Raubenheim', '1980-10-11', 'Western', 'American Bandits: Frank and Jesse James', 10),
+    (38, 'Tera', 'Sego', '1950-03-25', 'Action|Adventure|Sci-Fi', 'Hulk', 3),
+    (39, 'Leonanie', 'Edgars', '1958-07-04', 'Documentary', 'Home Movie', 11),
+    (40, 'Cary', 'Collough', '1983-08-07', 'Mystery', 'The Sign of Four: Sherlock Holmes'' Greatest Case', 1);
 
-INSERT INTO Role
-    (role_id,projectid,role_type,char_name,description,age_range,gender)
-values 
-    (1, 70, 'extra', 'Cordie Wroughton', 'strong', '18-25', 'Female'),
-    (2, 26, 'extra', 'Garek Butterfield', 'happy', '7-12', 'Male'),
-    (3, 35, 'protagonist', 'Adolphe Needs', 'strong', '65+', 'Male'),
-    (4, 28, 'extra', 'Vassili Chudleigh', 'proud', '7-12', 'Bigender'),
-    (5, 13, 'protagonist', 'Rubia Durrington', 'proud', '30-45', 'Female'),
-    (6, 18, 'extra', 'Birk Domb', 'sad', '7-12', 'Male'),
-    (7, 22, 'supporting role', 'Chiquita Bromfield', 'depressed', '7-12', 'Female'),
-    (8, 38, 'supporting role', 'Consuelo Crighton', 'proud', '18-25', 'Female'),
-    (9, 86, 'villian', 'Selle Scoullar', 'sad', '7-12', 'Female'),
-    (10, 88, 'villian', 'Paten Towne', 'confident', '30-45', 'Agender'),
-    (11, 37, 'supporting role', 'Sib Klementz', 'confident', '65+', 'Female'),
-    (12, 99, 'villian', 'Chelsey Mees', 'confident', '7-12', 'Female'),
-    (13, 95, 'supporting role', 'Haslett Lamball', 'strong', '18-25', 'Male'),
-    (14, 79, 'villian', 'Gay Gueny', 'strong', '7-12', 'Male'),
-    (15, 9, 'protagonist', 'Larine Meritt', 'depressed', '30-45', 'Female'),
-    (16, 87, 'protagonist', 'Garrik Stairmond', 'strong', '18-25', 'Male'),
-    (17, 54, 'supporting role', 'Wynny Heymes', 'happy', '30-45', 'Female'),
-    (18, 69, 'protagonist', 'Deedee Tofanelli', 'depressed', '18-25', 'Genderfluid'),
-    (19, 16, 'protagonist', 'Viole Rentelll', 'confident', '18-25', 'Female'),
-    (20, 93, 'extra', 'Mariellen Cruickshanks', 'depressed', '30-45', 'Female'),
-    (21, 22, 'villian', 'Binnie Lowle', 'confident', '7-12', 'Female'),
-    (22, 61, 'villian', 'Saudra Blasi', 'sad', '65+', 'Female'),
-    (23, 69, 'extra', 'Rabi Dalyiel', 'happy', '18-25', 'Male'),
-    (24, 62, 'supporting role', 'Siffre Mayne', 'confident', '65+', 'Male'),
-    (25, 19, 'protagonist', 'Helga Ludlom', 'strong', '65+', 'Female'),
-    (26, 31, 'protagonist', 'Crawford Gerge', 'strong', '30-45', 'Male'),
-    (27, 31, 'supporting role', 'Glenine Bugdell', 'strong', '65+', 'Female'),
-    (28, 61, 'protagonist', 'Osborne Yerson', 'depressed', '65+', 'Male'),
-    (29, 15, 'supporting role', 'Leah Van der Hoven', 'depressed', '30-45', 'Female'),
-    (30, 67, 'villian', 'Garrik Sever', 'sad', '65+', 'Male'),
-    (31, 18, 'protagonist', 'Genna Lumox', 'strong', '65+', 'Female'),
-    (32, 41, 'villian', 'Tull McVittie', 'strong', '18-25', 'Male'),
-    (33, 23, 'supporting role', 'Carleton Prickett', 'happy', '7-12', 'Genderqueer'),
-    (34, 14, 'protagonist', 'Eloisa Van Velde', 'strong', '7-12', 'Female'),
-    (35, 39, 'villian', 'Fred Liddall', 'confident', '7-12', 'Male'),
-    (36, 41, 'supporting role', 'Sylvan Hacker', 'confident', '30-45', 'Agender'),
-    (37, 20, 'extra', 'Drew Keir', 'confident', '30-45', 'Male'),
-    (38, 80, 'protagonist', 'Cordey Relton', 'strong', '65+', 'Female'),
-    (39, 47, 'extra', 'Niles Muncie', 'strong', '18-25', 'Male'),
-    (40, 4, 'villian', 'Ladonna Mapham', 'proud', '65+', 'Female'),
-    (41, 24, 'protagonist', 'Peder Cloy', 'strong', '7-12', 'Male'),
-    (42, 20, 'villian', 'Henri Smaling', 'strong', '18-25', 'Male'),
-    (43, 49, 'protagonist', 'Marin Sergeant', 'sad', '30-45', 'Female'),
-    (44, 22, 'extra', 'Gunter Pracy', 'sad', '18-25', 'Male'),
-    (45, 42, 'supporting role', 'Kendrick Danne', 'proud', '18-25', 'Male'),
-    (46, 91, 'villian', 'Farr Hallex', 'sad', '7-12', 'Male'),
-    (47, 94, 'protagonist', 'Benny Usmar', 'strong', '7-12', 'Female'),
-    (48, 72, 'villian', 'Lindy Herreran', 'sad', '7-12', 'Female'),
-    (49, 21, 'extra', 'Giffer Ewens', 'depressed', '7-12', 'Male'),
-    (50, 34, 'protagonist', 'Ashia Marston', 'confident', '65+', 'Female'),
-    (51, 84, 'protagonist', 'Borden Erwin', 'proud', '18-25', 'Male'),
-    (52, 47, 'protagonist', 'Dorella Petrak', 'confident', '30-45', 'Female'),
-    (53, 24, 'supporting role', 'Lorrie Lubeck', 'strong', '65+', 'Female'),
-    (54, 70, 'extra', 'Reece Marshallsay', 'proud', '30-45', 'Male'),
-    (55, 6, 'villian', 'Dory Mollene', 'happy', '18-25', 'Female'),
-    (56, 40, 'protagonist', 'Pennie Keerl', 'strong', '30-45', 'Male'),
-    (57, 18, 'supporting role', 'Mortie Oluwatoyin', 'sad', '65+', 'Male'),
-    (58, 99, 'extra', 'Emlen Scrowston', 'strong', '30-45', 'Male'),
-    (59, 88, 'villian', 'Rosene Gingles', 'strong', '7-12', 'Female'),
-    (60, 48, 'villian', 'Jim Chasemore', 'happy', '18-25', 'Male'),
-    (61, 69, 'protagonist', 'Keely Plumtree', 'depressed', '7-12', 'Polygender'),
-    (62, 93, 'protagonist', 'Griffith McGaughie', 'proud', '30-45', 'Male'),
-    (63, 79, 'protagonist', 'Mallissa Pavier', 'sad', '18-25', 'Genderfluid'),
-    (64, 65, 'villian', 'Parsifal Skyrme', 'happy', '7-12', 'Male'),
-    (65, 33, 'protagonist', 'Annamaria Telfer', 'depressed', '65+', 'Female'),
-    (66, 78, 'supporting role', 'Trisha Cantu', 'happy', '30-45', 'Female'),
-    (67, 21, 'supporting role', 'Earle Spinley', 'strong', '65+', 'Male'),
-    (68, 59, 'extra', 'Allis Gornar', 'proud', '7-12', 'Female'),
-    (69, 4, 'villian', 'Daisi Switsur', 'happy', '7-12', 'Female'),
-    (70, 6, 'supporting role', 'Anya Lytle', 'depressed', '30-45', 'Female'),
-    (71, 52, 'supporting role', 'Portie Niaves', 'strong', '30-45', 'Male'),
-    (72, 23, 'villian', 'Solly Petrak', 'depressed', '65+', 'Male'),
-    (73, 26, 'protagonist', 'Von Oakshott', 'depressed', '18-25', 'Male'),
-    (74, 76, 'supporting role', 'Bowie Martt', 'proud', '30-45', 'Male'),
-    (75, 61, 'protagonist', 'Alfreda Attoc', 'confident', '30-45', 'Female');
+
 
 INSERT INTO Project
     (p_id, title, type, cast, country, genre, status, duration, dir_id, proj_release_date)
@@ -451,6 +374,84 @@ values
     (100, 'Lady Killer', 'TV Show', 111, 'Philippines', 'Drama|Romance|War', false, 489, 30, '2024-11-15');
 
 
+INSERT INTO Role
+    (role_id,projectid,role_type,char_name,description,age_range,gender)
+values 
+    (1, 70, 'extra', 'Cordie Wroughton', 'strong', '18-25', 'Female'),
+    (2, 26, 'extra', 'Garek Butterfield', 'happy', '7-12', 'Male'),
+    (3, 35, 'protagonist', 'Adolphe Needs', 'strong', '65+', 'Male'),
+    (4, 28, 'extra', 'Vassili Chudleigh', 'proud', '7-12', 'Bigender'),
+    (5, 13, 'protagonist', 'Rubia Durrington', 'proud', '30-45', 'Female'),
+    (6, 18, 'extra', 'Birk Domb', 'sad', '7-12', 'Male'),
+    (7, 22, 'supporting role', 'Chiquita Bromfield', 'depressed', '7-12', 'Female'),
+    (8, 38, 'supporting role', 'Consuelo Crighton', 'proud', '18-25', 'Female'),
+    (9, 86, 'villian', 'Selle Scoullar', 'sad', '7-12', 'Female'),
+    (10, 88, 'villian', 'Paten Towne', 'confident', '30-45', 'Agender'),
+    (11, 37, 'supporting role', 'Sib Klementz', 'confident', '65+', 'Female'),
+    (12, 99, 'villian', 'Chelsey Mees', 'confident', '7-12', 'Female'),
+    (13, 95, 'supporting role', 'Haslett Lamball', 'strong', '18-25', 'Male'),
+    (14, 79, 'villian', 'Gay Gueny', 'strong', '7-12', 'Male'),
+    (15, 9, 'protagonist', 'Larine Meritt', 'depressed', '30-45', 'Female'),
+    (16, 87, 'protagonist', 'Garrik Stairmond', 'strong', '18-25', 'Male'),
+    (17, 54, 'supporting role', 'Wynny Heymes', 'happy', '30-45', 'Female'),
+    (18, 69, 'protagonist', 'Deedee Tofanelli', 'depressed', '18-25', 'Genderfluid'),
+    (19, 16, 'protagonist', 'Viole Rentelll', 'confident', '18-25', 'Female'),
+    (20, 93, 'extra', 'Mariellen Cruickshanks', 'depressed', '30-45', 'Female'),
+    (21, 22, 'villian', 'Binnie Lowle', 'confident', '7-12', 'Female'),
+    (22, 61, 'villian', 'Saudra Blasi', 'sad', '65+', 'Female'),
+    (23, 69, 'extra', 'Rabi Dalyiel', 'happy', '18-25', 'Male'),
+    (24, 62, 'supporting role', 'Siffre Mayne', 'confident', '65+', 'Male'),
+    (25, 19, 'protagonist', 'Helga Ludlom', 'strong', '65+', 'Female'),
+    (26, 31, 'protagonist', 'Crawford Gerge', 'strong', '30-45', 'Male'),
+    (27, 31, 'supporting role', 'Glenine Bugdell', 'strong', '65+', 'Female'),
+    (28, 61, 'protagonist', 'Osborne Yerson', 'depressed', '65+', 'Male'),
+    (29, 15, 'supporting role', 'Leah Van der Hoven', 'depressed', '30-45', 'Female'),
+    (30, 67, 'villian', 'Garrik Sever', 'sad', '65+', 'Male'),
+    (31, 18, 'protagonist', 'Genna Lumox', 'strong', '65+', 'Female'),
+    (32, 41, 'villian', 'Tull McVittie', 'strong', '18-25', 'Male'),
+    (33, 23, 'supporting role', 'Carleton Prickett', 'happy', '7-12', 'Genderqueer'),
+    (34, 14, 'protagonist', 'Eloisa Van Velde', 'strong', '7-12', 'Female'),
+    (35, 39, 'villian', 'Fred Liddall', 'confident', '7-12', 'Male'),
+    (36, 41, 'supporting role', 'Sylvan Hacker', 'confident', '30-45', 'Agender'),
+    (37, 20, 'extra', 'Drew Keir', 'confident', '30-45', 'Male'),
+    (38, 80, 'protagonist', 'Cordey Relton', 'strong', '65+', 'Female'),
+    (39, 47, 'extra', 'Niles Muncie', 'strong', '18-25', 'Male'),
+    (40, 4, 'villian', 'Ladonna Mapham', 'proud', '65+', 'Female'),
+    (41, 24, 'protagonist', 'Peder Cloy', 'strong', '7-12', 'Male'),
+    (42, 20, 'villian', 'Henri Smaling', 'strong', '18-25', 'Male'),
+    (43, 49, 'protagonist', 'Marin Sergeant', 'sad', '30-45', 'Female'),
+    (44, 22, 'extra', 'Gunter Pracy', 'sad', '18-25', 'Male'),
+    (45, 42, 'supporting role', 'Kendrick Danne', 'proud', '18-25', 'Male'),
+    (46, 91, 'villian', 'Farr Hallex', 'sad', '7-12', 'Male'),
+    (47, 94, 'protagonist', 'Benny Usmar', 'strong', '7-12', 'Female'),
+    (48, 72, 'villian', 'Lindy Herreran', 'sad', '7-12', 'Female'),
+    (49, 21, 'extra', 'Giffer Ewens', 'depressed', '7-12', 'Male'),
+    (50, 34, 'protagonist', 'Ashia Marston', 'confident', '65+', 'Female'),
+    (51, 84, 'protagonist', 'Borden Erwin', 'proud', '18-25', 'Male'),
+    (52, 47, 'protagonist', 'Dorella Petrak', 'confident', '30-45', 'Female'),
+    (53, 24, 'supporting role', 'Lorrie Lubeck', 'strong', '65+', 'Female'),
+    (54, 70, 'extra', 'Reece Marshallsay', 'proud', '30-45', 'Male'),
+    (55, 6, 'villian', 'Dory Mollene', 'happy', '18-25', 'Female'),
+    (56, 40, 'protagonist', 'Pennie Keerl', 'strong', '30-45', 'Male'),
+    (57, 18, 'supporting role', 'Mortie Oluwatoyin', 'sad', '65+', 'Male'),
+    (58, 99, 'extra', 'Emlen Scrowston', 'strong', '30-45', 'Male'),
+    (59, 88, 'villian', 'Rosene Gingles', 'strong', '7-12', 'Female'),
+    (60, 48, 'villian', 'Jim Chasemore', 'happy', '18-25', 'Male'),
+    (61, 69, 'protagonist', 'Keely Plumtree', 'depressed', '7-12', 'Polygender'),
+    (62, 93, 'protagonist', 'Griffith McGaughie', 'proud', '30-45', 'Male'),
+    (63, 79, 'protagonist', 'Mallissa Pavier', 'sad', '18-25', 'Genderfluid'),
+    (64, 65, 'villian', 'Parsifal Skyrme', 'happy', '7-12', 'Male'),
+    (65, 33, 'protagonist', 'Annamaria Telfer', 'depressed', '65+', 'Female'),
+    (66, 78, 'supporting role', 'Trisha Cantu', 'happy', '30-45', 'Female'),
+    (67, 21, 'supporting role', 'Earle Spinley', 'strong', '65+', 'Male'),
+    (68, 59, 'extra', 'Allis Gornar', 'proud', '7-12', 'Female'),
+    (69, 4, 'villian', 'Daisi Switsur', 'happy', '7-12', 'Female'),
+    (70, 6, 'supporting role', 'Anya Lytle', 'depressed', '30-45', 'Female'),
+    (71, 52, 'supporting role', 'Portie Niaves', 'strong', '30-45', 'Male'),
+    (72, 23, 'villian', 'Solly Petrak', 'depressed', '65+', 'Male'),
+    (73, 26, 'protagonist', 'Von Oakshott', 'depressed', '18-25', 'Male'),
+    (74, 76, 'supporting role', 'Bowie Martt', 'proud', '30-45', 'Male'),
+    (75, 61, 'protagonist', 'Alfreda Attoc', 'confident', '30-45', 'Female');
 
 INSERT INTO Reviews
     (description,rating,actor_id,dir_id)
@@ -526,7 +527,7 @@ values
     ('Helpful', 1, 16, 28),
     ('Helpful', 1, 71, 23),
     ('Solid', 4, 16, 16),
-    ('Tried their best', 3, 28, 7),
+    ('Tried their best', 3, 29, 7),
     ('Hardworker', 5, 89, 30),
     ('Helpful', 1, 65, 23),
     ('Useful', 2, 71, 12),
@@ -556,106 +557,106 @@ values
     ('Hardworker', 1, 17, 20),
     ('Helpful', 5, 35, 25);
 
-INSERT INTO Application
-    (project_id, role_id, actor_id, resume, status)
-values
-    (72, 9, 87, 'DolorMorbiVel.avi', true),
-    (12, 20, 66, 'JustoMorbiUt.ppt', true),
-    (81, 45, 24, 'UltricesVelAugue.jpeg', true),
-    (86, 19, 51, 'AugueVestibulumAnte.mp3', false),
-    (4, 5, 19, 'Nec.mp3', true),
-    (65, 40, 78, 'NullaIntegerPede.doc', false),
-    (16, 51, 68, 'NullaTellusIn.mpeg', false),
-    (48, 19, 9, 'MiPede.ppt', false),
-    (85, 72, 44, 'PortaVolutpat.avi', false),
-    (4, 4, 3, 'ElitAcNulla.doc', false),
-    (91, 64, 96, 'VehiculaCondimentum.doc', false),
-    (47, 23, 76, 'Fringilla.jpeg', false),
-    (9, 41, 28, 'InterdumVenenatis.xls', true),
-    (20, 6, 60, 'AdipiscingElit.xls', false),
-    (18, 56, 27, 'SapienUtNunc.png', false),
-    (92, 14, 37, 'PrimisIn.ppt', false),
-    (57, 28, 33, 'VestibulumAnteIpsum.ppt', false),
-    (28, 46, 57, 'UtMassaQuis.ppt', false),
-    (50, 22, 35, 'LectusSuspendissePotenti.mp3', true),
-    (81, 51, 83, 'InFaucibusOrci.gif', true),
-    (45, 69, 28, 'MaecenasLeo.avi', true),
-    (26, 22, 41, 'Auctor.ppt', true),
-    (42, 3, 44, 'UltricesVel.ppt', true),
-    (44, 6, 59, 'Lacus.tiff', false),
-    (5, 51, 17, 'PhasellusIn.tiff', true),
-    (29, 52, 20, 'Dapibus.txt', false),
-    (84, 50, 82, 'NullamSit.mp3', true),
-    (13, 35, 72, 'TellusInSagittis.ppt', false),
-    (17, 47, 88, 'IdLuctusNec.avi', false),
-    (34, 69, 92, 'Quisque.avi', true),
-    (69, 27, 29, 'PosuereCubilia.pdf', true),
-    (77, 50, 44, 'IpsumPrimisIn.avi', true),
-    (22, 15, 68, 'Amet.ppt', false),
-    (85, 38, 35, 'NislDuisAc.pdf', true),
-    (97, 15, 44, 'Enim.mp3', true),
-    (15, 14, 57, 'EtiamVel.tiff', false),
-    (17, 18, 99, 'MassaId.ppt', true),
-    (44, 66, 40, 'Ultricies.jpeg', false),
-    (23, 40, 86, 'Quam.jpeg', false),
-    (66, 41, 58, 'AIpsumInteger.mp3', true),
-    (47, 39, 66, 'CongueRisus.tiff', false),
-    (82, 27, 56, 'Libero.mp3', false),
-    (5, 24, 20, 'Massa.xls', true),
-    (99, 34, 63, 'TristiqueTortor.mp3', true),
-    (3, 44, 75, 'In.jpeg', true),
-    (74, 44, 33, 'TurpisDonecPosuere.xls', true),
-    (71, 5, 91, 'NullaSed.pdf', true),
-    (86, 25, 32, 'SapienDignissimVestibulum.doc', false),
-    (87, 23, 57, 'ErosElementumPellentesque.mp3', true),
-    (7, 1, 85, 'SitAmetSem.jpeg', false),
-    (46, 64, 63, 'AugueVestibulum.tiff', true),
-    (62, 46, 87, 'Ultrices.pdf', false),
-    (65, 46, 40, 'NislNuncNisl.doc', false),
-    (84, 61, 6, 'AugueVestibulumAnte.txt', false),
-    (13, 21, 81, 'Suspendisse.mp3', false),
-    (11, 50, 39, 'AnteVivamus.ppt', true),
-    (88, 8, 43, 'UtMauris.doc', false),
-    (1, 29, 71, 'SedAccumsan.xls', true),
-    (41, 60, 81, 'Tincidunt.xls', false),
-    (37, 62, 27, 'MassaTemporConvallis.jpeg', true),
-    (39, 29, 47, 'EgetEleifend.mp3', true),
-    (8, 64, 52, 'Pulvinar.mp3', false),
-    (38, 53, 100, 'Quisque.jpeg', true),
-    (59, 32, 62, 'Lectus.ppt', false),
-    (71, 19, 6, 'NisiEuOrci.avi', false),
-    (51, 5, 26, 'NequeSapienPlacerat.ppt', true),
-    (63, 57, 7, 'SuspendisseAccumsan.txt', true),
-    (17, 51, 13, 'Molestie.png', true),
-    (56, 16, 73, 'Ante.xls', true),
-    (97, 4, 95, 'Augue.ppt', true),
-    (19, 65, 94, 'FacilisiCrasNon.xls', false),
-    (3, 71, 54, 'Amet.pdf', false),
-    (21, 33, 6, 'HabitassePlatea.avi', false),
-    (12, 63, 99, 'Tristique.mov', false),
-    (4, 16, 49, 'LectusSuspendissePotenti.xls', true),
-    (98, 15, 15, 'ConsequatMetus.tiff', true),
-    (38, 61, 16, 'Orci.avi', true),
-    (8, 33, 89, 'NullaSuscipitLigula.doc', false),
-    (53, 36, 71, 'DisParturient.gif', true),
-    (35, 36, 26, 'QuamSuspendissePotenti.ppt', true),
-    (61, 17, 92, 'NullaSuspendissePotenti.ppt', false),
-    (36, 12, 71, 'OrciPede.doc', true),
-    (87, 15, 55, 'Mi.txt', true),
-    (18, 57, 26, 'SagittisNam.mov', false),
-    (36, 7, 54, 'LigulaSuspendisseOrnare.png', false),
-    (10, 49, 63, 'NullamSitAmet.ppt', false),
-    (76, 73, 5, 'AdipiscingElit.avi', true),
-    (6, 70, 65, 'PurusEuMagna.mp3', true),
-    (47, 31, 1, 'EtEros.tiff', false),
-    (82, 38, 66, 'AnteVivamus.avi', false),
-    (19, 27, 52, 'PellentesqueUltricesPhasellus.mp3', false),
-    (99, 47, 91, 'UtMaurisEget.ppt', false),
-    (70, 65, 100, 'PretiumNislUt.xls', true),
-    (55, 43, 7, 'TurpisEget.avi', false),
-    (35, 24, 33, 'At.xls', false),
-    (25, 61, 35, 'Hac.ppt', false),
-    (90, 72, 56, 'PraesentBlandit.ppt', false),
-    (57, 70, 92, 'VulputateNonummyMaecenas.mp3', false),
-    (16, 7, 79, 'NequeSapienPlacerat.doc', false),
-    (4, 8, 3, 'NullamSitAmet.tiff', false);
+-- INSERT INTO Application
+--     (projectid, role_id, actor_id, resume, status, submit_time)
+-- values
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (76, 3, 5, 'EgetElit.mp3', false, '2022-04-15 05:40:55');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (19, 17, 95, 'Posuere.tiff', true, '2022-06-12 11:05:17');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (87, 50, 7, 'SuspendissePotenti.avi', false, '2022-03-13 13:02:44');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (94, 38, 57, 'Sit.pdf', true, '2022-04-03 09:04:45');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (79, 67, 38, 'Quis.pdf', false, '2022-03-20 02:47:08');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (29, 20, 51, 'Non.jpeg', true, '2022-10-07 04:12:27');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (3, 52, 71, 'FusceConsequatNulla.tiff', true, '2022-08-19 09:18:32');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (81, 68, 16, 'PellentesqueEgetNunc.xls', true, '2022-11-26 11:20:13');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (11, 64, 40, 'LuctusEt.ppt', true, '2022-01-03 06:04:08');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (81, 69, 16, 'PretiumIaculisDiam.txt', true, '2022-03-21 02:29:31');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (7, 33, 29, 'OrciVehiculaCondimentum.mp3', true, '2022-09-23 08:12:51');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (55, 42, 60, 'Id.jpeg', false, '2022-08-27 02:40:49');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (3, 21, 69, 'SociisNatoque.jpeg', false, '2021-12-10 18:58:57');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (1, 21, 92, 'UtMaurisEget.ppt', false, '2022-12-06 01:46:52');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (87, 30, 81, 'AccumsanOdioCurabitur.avi', false, '2022-07-05 14:25:58');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (41, 40, 75, 'TellusNulla.xls', false, '2022-07-11 07:10:27');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (83, 2, 1, 'CommodoVulputateJusto.xls', true, '2022-04-04 22:28:20');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (30, 22, 49, 'VulputateLuctusCum.txt', false, '2022-05-25 00:21:31');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (34, 74, 3, 'NullaSed.pdf', true, '2022-08-01 16:22:09');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (72, 9, 97, 'TortorDuisMattis.mp3', true, '2022-04-27 15:53:43');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (28, 70, 41, 'Ultrices.xls', true, '2022-08-08 07:19:43');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (2, 14, 84, 'Posuere.mp3', true, '2022-01-11 08:22:29');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (17, 28, 96, 'CubiliaCuraeDonec.tiff', true, '2022-11-06 21:16:44');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (5, 10, 4, 'LuctusEtUltrices.xls', false, '2022-06-25 08:07:36');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (57, 37, 66, 'EstLaciniaNisi.ppt', true, '2022-04-22 06:08:43');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (91, 9, 37, 'TristiqueInTempus.jpeg', false, '2022-09-04 14:57:16');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (57, 16, 74, 'JustoInHac.png', false, '2022-10-14 22:49:52');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (97, 66, 80, 'QuamA.xls', true, '2022-10-25 02:47:24');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (21, 50, 32, 'InQuamFringilla.tiff', false, '2022-01-04 04:54:11');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (19, 14, 33, 'Nulla.avi', false, '2022-02-15 13:03:45');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (63, 13, 86, 'LiberoUt.gif', true, '2022-10-29 02:46:25');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (92, 45, 56, 'SodalesSed.png', false, '2022-10-02 13:19:16');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (18, 30, 31, 'Dis.ppt', false, '2022-10-29 23:30:13');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (98, 19, 13, 'MaurisLaciniaSapien.avi', false, '2022-10-12 02:25:55');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (15, 18, 36, 'SedVestibulum.xls', false, '2022-09-23 20:58:19');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (61, 33, 93, 'A.ppt', true, '2022-11-28 05:15:35');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (70, 15, 75, 'Non.ppt', true, '2022-10-31 11:41:21');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (40, 44, 68, 'InPurusEu.xls', true, '2022-10-10 05:48:33');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (93, 11, 99, 'Tortor.mp3', true, '2022-01-25 05:26:31');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (3, 67, 15, 'CursusVestibulum.mp3', true, '2022-07-06 04:36:10');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (72, 11, 66, 'Integer.gif', false, '2022-10-29 06:12:25');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (68, 36, 39, 'Justo.avi', false, '2022-09-20 10:42:59');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (89, 13, 37, 'Eu.avi', true, '2022-11-15 14:32:50');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (32, 49, 19, 'SedAnte.ppt', true, '2022-12-07 07:54:54');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (38, 45, 7, 'IpsumAcTellus.mp3', false, '2022-04-25 21:45:12');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (93, 20, 55, 'CommodoVulputate.xls', true, '2022-01-14 20:37:51');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (38, 47, 28, 'SitAmet.ppt', true, '2022-01-22 11:41:17');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (72, 52, 91, 'Orci.xls', true, '2022-07-15 23:09:34');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (78, 62, 80, 'TemporTurpisNec.xls', true, '2022-05-16 06:21:14');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (38, 19, 75, 'Velit.ppt', true, '2022-07-07 13:18:12');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (39, 56, 84, 'Congue.ppt', false, '2022-09-17 01:35:06');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (38, 33, 91, 'MassaId.pdf', false, '2021-12-26 11:55:20');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (24, 56, 82, 'At.xls', true, '2022-10-30 22:47:23');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (75, 67, 3, 'Facilisi.mp3', false, '2022-06-08 13:15:29');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (6, 52, 99, 'LuctusCum.jpeg', true, '2022-11-10 21:03:11');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (6, 46, 5, 'Orci.jpeg', true, '2022-08-14 14:18:29');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (33, 25, 50, 'CongueEtiam.avi', true, '2021-12-12 23:27:09');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (10, 13, 78, 'MassaId.mov', true, '2022-06-17 00:52:27');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (32, 20, 63, 'DolorSitAmet.tiff', true, '2022-07-10 04:03:12');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (22, 21, 85, 'PedePosuereNonummy.mp3', false, '2022-02-19 21:08:04');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (69, 21, 20, 'SuspendissePotentiNullam.ppt', true, '2022-03-05 02:05:57');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (54, 18, 19, 'VelSemSed.mp3', true, '2022-11-16 16:38:05');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (31, 20, 79, 'EratCurabiturGravida.xls', true, '2022-07-22 06:34:24');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (59, 7, 39, 'EstPhasellus.mp3', true, '2021-12-29 07:04:42');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (46, 13, 62, 'OrnareImperdietSapien.xls', true, '2022-07-03 19:17:07');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (52, 12, 75, 'Tortor.jpeg', true, '2022-02-15 12:00:07');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (35, 61, 43, 'Justo.mpeg', false, '2022-02-20 17:14:05');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (64, 29, 16, 'Ut.avi', false, '2022-01-10 02:28:16');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (36, 25, 86, 'NullaFacilisi.ppt', false, '2022-08-19 08:15:54');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (67, 50, 63, 'Nunc.mp3', false, '2022-01-07 15:08:46');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (94, 31, 11, 'NullaAc.mpeg', true, '2022-11-30 06:43:36');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (29, 24, 85, 'Dapibus.doc', false, '2022-06-28 02:58:25');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (95, 17, 47, 'VitaeNisl.gif', false, '2022-07-23 12:30:57');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (61, 67, 69, 'Venenatis.gif', false, '2022-08-12 11:21:18');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (33, 36, 23, 'Pellentesque.ppt', false, '2022-09-15 18:11:38');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (45, 34, 28, 'PrimisIn.ppt', false, '2022-05-23 20:31:25');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (80, 70, 70, 'LacusMorbi.xls', true, '2022-02-15 17:23:04');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (84, 9, 62, 'Vestibulum.txt', true, '2021-12-19 13:57:43');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (28, 52, 32, 'InAnte.xls', false, '2022-10-04 06:00:29');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (6, 7, 27, 'LaciniaSapien.jpeg', false, '2022-07-29 00:57:30');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (80, 7, 5, 'IdOrnareImperdiet.mp3', false, '2022-11-09 11:40:03');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (24, 38, 85, 'Suscipit.tiff', false, '2022-07-30 12:37:55');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (23, 40, 12, 'QuamPharetra.xls', true, '2022-04-29 10:22:12');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (92, 65, 97, 'AmetEros.xls', true, '2022-05-31 06:25:27');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (41, 2, 74, 'Leo.mp3', false, '2022-05-04 16:42:14');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (7, 21, 82, 'Ornare.doc', true, '2021-12-22 04:18:06');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (35, 14, 29, 'At.ppt', false, '2022-02-25 15:17:53');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (32, 62, 21, 'In.avi', true, '2022-05-13 04:20:07');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (57, 62, 7, 'Ultrices.avi', false, '2022-11-18 12:07:29');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (96, 53, 4, 'VestibulumQuam.avi', true, '2022-05-17 12:39:29');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (50, 42, 58, 'LigulaSitAmet.xls', true, '2022-10-31 07:29:22');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (11, 26, 82, 'QuamSuspendisse.jpeg', true, '2022-09-24 00:59:44');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (74, 23, 47, 'TurpisAPede.avi', true, '2022-01-22 21:26:48');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (27, 31, 14, 'SemFusceConsequat.mov', true, '2022-10-31 05:52:47');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (68, 33, 7, 'LuctusUltricies.pdf', true, '2022-07-17 05:00:05');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (52, 60, 21, 'MattisOdioDonec.xls', true, '2022-01-23 14:03:08');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (59, 21, 82, 'SagittisDui.xls', true, '2022-03-14 19:07:02');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (87, 68, 16, 'JustoMaecenas.avi', false, '2022-08-15 00:01:06');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (16, 56, 47, 'ParturientMontes.tiff', true, '2022-09-03 06:30:40');
+insert into Application (projectid, role_id, actor_id, resume, status, submit_time) values (56, 65, 99, 'NonLigula.jpeg', false, '2022-05-02 15:06:11');
