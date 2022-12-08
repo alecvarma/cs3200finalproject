@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify, make_response
 import json
 from src import db
+from datetime import datetime
 
 
 actors = Blueprint('actors', __name__)
@@ -10,7 +11,7 @@ actors = Blueprint('actors', __name__)
 def get_roles():
     cursor = db.get_db().cursor()
     # status attritube of role is not in the example data
-    cursor.execute('select r.role_id,p.title,r.role_type,r.char_name,r.description,r.age_range,r.gender\
+    cursor.execute('select r.role_id,p.title,r.role_type,r.char_name,r.description,r.age_range,r.gender,p.p_id\
         from Role r join Project p on r.projectid = p.p_id')
     row_headers = [x[0] for x in cursor.description]
     json_data = []
@@ -45,8 +46,13 @@ def get_applications(actorID):
 def post_application():
     from_page = request.form
     cursor = db.get_db().cursor()
-    #project_id, role_id, actor_id, resume, status
-    cursor.execute('insert into Role ... ')
+    #projectid, role_id, actor_id, resume, status, submit_time
+       # '2022-09-20 10:42:59'
+    right_now = datetime.now()
+    dt_string = right_now.strftime("%Y-%m-%d %H:%M:%S")
+    
+    cursor.execute(f'insert into Role (projectid, role_id, actor_id, resume, status, submit_time) \
+        values ({from_page["projectId"]},{from_page["role_id"]},{from_page["actor_id"]},{from_page["resume"]}, true,{dt_string}')
     return f"Applied to Role {from_page['char_name']}"
 
 # Get reviews for an actor with a particular actor_id
