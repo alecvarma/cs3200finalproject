@@ -31,7 +31,7 @@ def get_actors():
 
     return jsonify(json_data)
 
-# get the top 5 products from the database
+# adds an actor
 @admins.route('/actors', methods=['Post'])
 def post_new_actor():
     from_page = request.form
@@ -43,3 +43,14 @@ def post_new_actor():
     cursor.execute(query, (from_page['f_name'], from_page['l_name'], from_page['dob'], from_page['admin_id']))
 
     return f'Actor: {from_page["f_name"]} {from_page["l_name"]} added by Admin Id : {from_page["admin_id"]}'
+
+# updates an actor
+@admins.route('/updateActor/<actorId', methods=['Post'])
+def update_actor(actorId):
+    from_page = request.form
+    cursor = db.get_db().cursor()
+    query = 'INSERT INTO ACTOR (first_name,last_name,DOB, admin_id) values (%s, %s %s, %s) where actor_id = {0}'.format(actorId)
+    
+    cursor.execute(query, (from_page['f_name'], from_page['l_name'], from_page['dob'], from_page['admin_id']))
+
+    return f'Actor: {from_page["f_name"]} {from_page["l_name"]} updated by Admin Id : {from_page["admin_id"]}'
