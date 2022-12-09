@@ -60,3 +60,57 @@ def post_review():
     return "Added to Reviews"
 
 
+# GET Projects
+@directors.route('/projects/<dir_id>', methods=['GET'])
+def get_projects(dir_id):
+    cursor = db.get_db().cursor()
+    #project_id, role_id, actor_id, resume, status
+    cursor.execute('SELECT * \
+            FROM Project \
+            WHERE dir_id = {0}'.format(dir_id))
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+# # GET Roles
+# @directors.route('/roles/<dir_id>', methods=['GET'])
+# def get_roles(dir_id):
+#     cursor = db.get_db().cursor()
+#     #project_id, role_id, actor_id, resume, status
+#     cursor.execute('SELECT * \
+#             FROM Role \
+#             WHERE dir_id = {0}'.format(dir_id))
+#     row_headers = [x[0] for x in cursor.description]
+#     json_data = []
+#     theData = cursor.fetchall()
+#     for row in theData:
+#         json_data.append(dict(zip(row_headers, row)))
+#     the_response = make_response(jsonify(json_data))
+#     the_response.status_code = 200
+#     the_response.mimetype = 'application/json'
+#     return the_response
+
+# GET Reviews
+@directors.route('/reviews/<dir_id>', methods=['GET'])
+def get_reviews(dir_id):
+    cursor = db.get_db().cursor()
+    #project_id, role_id, actor_id, resume, status
+    cursor.execute('SELECT * \
+            FROM Reviews \
+            WHERE dir_id = {0}'.format(dir_id))
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
