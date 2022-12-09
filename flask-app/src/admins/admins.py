@@ -37,7 +37,7 @@ def post_new_actor():
     from_page = request.form
     cursor = db.get_db().cursor()
     query = '''
-        INSERT INTO ACTOR (first_name,last_name,DOB, admin_id)
+        INSERT INTO Actor (first_name,last_name,DOB, admin_id)
         values (%s, %s %s, %s)
     '''
     cursor.execute(query, (from_page['f_name'], from_page['l_name'], from_page['dob'], from_page['admin_id']))
@@ -49,7 +49,7 @@ def post_new_actor():
 def update_actor(actorId):
     from_page = request.form
     cursor = db.get_db().cursor()
-    query = 'INSERT INTO ACTOR (first_name,last_name,DOB, admin_id) values (%s, %s %s, %s) where actor_id = {0}'.format(actorId)
+    query = 'INSERT INTO Actor (first_name,last_name,DOB, admin_id) values (%s, %s %s, %s) where actor_id = {0}'.format(actorId)
     
     cursor.execute(query, (from_page['f_name'], from_page['l_name'], from_page['dob'], from_page['admin_id']))
 
