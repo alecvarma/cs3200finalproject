@@ -16,8 +16,9 @@ directors = Blueprint('directors', __name__)
 def get_roles(directorID):
     cursor = db.get_db().cursor()
     # status attritube of role is not in the example data
-    cursor.execute('SELECT a.resume, a.status, a.submit_time, act.first_name, act.last_name\
-        from Director d join Project p on d.dir_id = p.dir_id join Application a on a.projectid = p.p_id join Actor act on act.actor_id = a.actor_id\
+    # join role r on act.actorID, include charname and proj title
+    cursor.execute('SELECT a.resume, r.char_name, p.title, a.status, a.submit_time, act.first_name, act.last_name\
+        from Director d join Project p on d.dir_id = p.dir_id join Application a on a.projectid = p.p_id join Actor act on act.actor_id = a.actor_id join Role r on p.p_id = r.projectid\
             where d.dir_id = {0}'.format(directorID))
 
     row_headers = [x[0] for x in cursor.description]
