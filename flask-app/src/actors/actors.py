@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, make_response
+from flask import Blueprint, request, jsonify, make_response, current_app
 import json
 from src import db
 from datetime import datetime
@@ -50,10 +50,12 @@ def post_application():
        # '2022-09-20 10:42:59'
     right_now = datetime.now()
     dt_string = right_now.strftime("%Y-%m-%d %H:%M:%S")
-    
-    cursor.execute(f'insert into Role (projectid, role_id, actor_id, resume, status, submit_time) \
-        values ({from_page["projectId"]},{from_page["role_id"]},{from_page["actor_id"]},{from_page["resume"]}, true,{dt_string}')
-    return f"Applied to Role {from_page['char_name']}"
+    # current_app.logger.info(from_page)
+    # current_app.logger.info('insert into Application (projectid, role_id, actor_id, resume, status, submit_time) \
+    #     values (%s,%s,%s,%s, true, %s', (from_page["projectId"],from_page["role_id"],from_page["actor_id"],from_page["resume"], dt_string))
+    cursor.execute('insert into Application (projectid, role_id, actor_id, resume, status, submit_time) \
+        values (%s,%s,%s,%s,true,%s)', (from_page["projectId"],from_page["role_id"],from_page["actor_id"],from_page["resume"], dt_string))
+    return f"Applied to Role"
 
 # Get reviews for an actor with a particular actor_id
 @actors.route('/reviews/<actorID>', methods=['GET'])
