@@ -45,7 +45,7 @@ def post_new_actor():
     return f'Actor: {from_page["f_name"]} {from_page["l_name"]} added by Admin Id : {from_page["admin_id"]}'
 
 # updates an actor
-@admins.route('/updateActor/<actorId', methods=['Post'])
+@admins.route('/updateActor/<actorId>', methods=['Post'])
 def update_actor(actorId):
     from_page = request.form
     cursor = db.get_db().cursor()

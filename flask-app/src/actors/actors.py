@@ -50,7 +50,7 @@ def post_application():
        # '2022-09-20 10:42:59'
     right_now = datetime.now()
     dt_string = right_now.strftime("%Y-%m-%d %H:%M:%S")
-    # current_app.logger.info(from_page)
+    current_app.logger.info(from_page)
     # current_app.logger.info('insert into Application (projectid, role_id, actor_id, resume, status, submit_time) \
     #     values (%s,%s,%s,%s, true, %s', (from_page["projectId"],from_page["role_id"],from_page["actor_id"],from_page["resume"], dt_string))
     cursor.execute('insert into Application (projectid, role_id, actor_id, resume, status, submit_time) \
