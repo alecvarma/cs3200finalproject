@@ -12,7 +12,7 @@ def get_actors():
     cursor = db.get_db().cursor()
 
     # use cursor to query the database for a list of products
-    cursor.execute('select actor_id,first_name,last_name,DOB, admin_id from Actor')
+    cursor.execute('select actor_id,first_name,last_name,DATE_FORMAT(DOB, "%Y-%m-%d") AS DOB , admin_id from Actor')
 
     # grab the column headers from the returned data
     column_headers = [x[0] for x in cursor.description]
