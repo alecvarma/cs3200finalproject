@@ -28,12 +28,12 @@ def create_app():
     from src.views import views
     from src.actors.actors import actors
     from src.directors.directors import directors
-    from src.products.products  import products
+    from src.admins.admins  import admins
 
     # Register the routes that we just imported so they can be properly handled
     app.register_blueprint(views,       url_prefix='/classic')
     app.register_blueprint(actors,   url_prefix='/actors')
     app.register_blueprint(directors, url_prefix='/directors')
-    app.register_blueprint(products,    url_prefix='/classic')
+    app.register_blueprint(admins,    url_prefix='/admins')
 
     return app
