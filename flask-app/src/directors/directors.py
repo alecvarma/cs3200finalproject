@@ -31,48 +31,32 @@ def get_roles(directorID):
     return the_response
 
 # POST Projects
-@directors.route('/applications/actorID>', methods=['POST'])
-def get_applications(actorID):
-    cursor = db.get_db().cursor()
-    #project_id, role_id, actor_id, resume, status
-    cursor.execute('select p.title, r.char_name, a.submit_time \
-        from application a join role r on a.role_id = r.role_id  \
-            join projects p on p.p_id = a.project_id where a.status = "true" and actor_id = {0}'.format(actorID))
-
-    row_headers = [x[0] for x in cursor.description]
-    json_data = []
-    theData = cursor.fetchall()
-    for row in theData:
-        json_data.append(dict(zip(row_headers, row)))
-    the_response = make_response(jsonify(json_data))
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
-
-# POST Roles
-@directors.route('/applications', methods=['POST'])
-def post_application():
+@directors.route('/projects', methods=['POST'])
+def post_projects():
     from_page = request.form
     cursor = db.get_db().cursor()
-    #project_id, role_id, actor_id, resume, status
-    cursor.execute('insert into Role ... ')
-    return f"Applied to Role {from_page['char_name']}"
+    cursor.execute('insert into Project (p_id, title, type, cast, country, genre, status, duration, dir_id, proj_release_date) \
+        values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)', (from_page["p_id"],from_page["title"],from_page["type"],from_page["cast"], 
+        from_page["country"], from_page["genre"], from_page["status"], from_page["duration"], from_page["dir_id"], from_page["proj_release_date"]))
+    return "Added to Projects"
+
+# POST Roles
+@directors.route('/roles', methods=['POST'])
+def post_role():
+    from_page = request.form
+    cursor = db.get_db().cursor()
+    cursor.execute('insert into Role (role_id,projectid,role_type,char_name,description,age_range,gender) \
+        values (%s,%s,%s,%s,%s,%s,%s)', (from_page["role_id"],from_page["projectid"],from_page["role_type"],from_page["char_name"], 
+        from_page["description"], from_page["age_range"], from_page["gender"]))
+    return "Added to Role"
 
 # POST Reviews
-@directors.route('/reviews/<actorID>', methods=['POST'])
-def get_reviews(actorID):
+@directors.route('/reviews', methods=['POST'])
+def post_review():
+    from_page = request.form
     cursor = db.get_db().cursor()
-    #project_id, role_id, actor_id, resume, status
-    cursor.execute('select r.rating, d.first_name, d.last_name, r.description \
-        from reviews r join director d on r.dir_id = d.dir_id where actor_id = {0}'.format(actorID))
-    row_headers = [x[0] for x in cursor.description]
-    json_data = []
-    theData = cursor.fetchall()
-    for row in theData:
-        json_data.append(dict(zip(row_headers, row)))
-    the_response = make_response(jsonify(json_data))
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
+    cursor.execute('insert into Reviews (description,rating,actor_id,dir_id) \
+        values (%s,%s,%s,%s)', (from_page["description"],from_page["rating"],from_page["actor_id"],from_page["dir_id"]))
+    return "Added to Reviews"
 
 
