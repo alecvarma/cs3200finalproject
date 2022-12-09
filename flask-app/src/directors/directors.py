@@ -65,9 +65,10 @@ def post_review():
 def get_projects(dir_id):
     cursor = db.get_db().cursor()
     #project_id, role_id, actor_id, resume, status
+    # true = open project
     cursor.execute('SELECT * \
             FROM Project \
-            WHERE dir_id = {0}'.format(dir_id))
+            WHERE status = "true" and dir_id = {0}'.format(dir_id))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
