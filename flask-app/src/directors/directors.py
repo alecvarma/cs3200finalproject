@@ -84,8 +84,8 @@ def get_roles_for_director(dir_id):
     cursor = db.get_db().cursor()
     #project_id, role_id, actor_id, resume, status
     cursor.execute('SELECT * \
-            FROM Role \
-            WHERE dir_id = {0}'.format(dir_id))
+            FROM Role r join Project p on r.projectid = p.p_id \
+            WHERE p.dir_id = {0}'.format(dir_id))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
