@@ -35,8 +35,8 @@ def get_roles(directorID):
 def post_projects():
     from_page = request.form
     cursor = db.get_db().cursor()
-    cursor.execute('insert into Project (p_id, title, type, cast, country, genre, status, duration, dir_id, proj_release_date) \
-        values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)', (from_page["p_id"],from_page["title"],from_page["type"],from_page["cast"], 
+    cursor.execute('insert into Project (title, type, cast, country, genre, status, duration, dir_id, proj_release_date) \
+        values (%s,%s,%s,%s,%s,%s,%s,%s,%s)', (from_page["title"],from_page["type"],from_page["cast"], 
         from_page["country"], from_page["genre"], from_page["status"], from_page["duration"], from_page["dir_id"], from_page["proj_release_date"]))
     return "Added to Projects"
 
@@ -45,8 +45,8 @@ def post_projects():
 def post_role():
     from_page = request.form
     cursor = db.get_db().cursor()
-    cursor.execute('insert into Role (role_id,projectid,role_type,char_name,description,age_range,gender) \
-        values (%s,%s,%s,%s,%s,%s,%s)', (from_page["role_id"],from_page["projectid"],from_page["role_type"],from_page["char_name"], 
+    cursor.execute('insert into Role (projectid,role_type,char_name,description,age_range,gender) \
+        values (%s,%s,%s,%s,%s,%s)', (from_page["projectid"],from_page["role_type"],from_page["char_name"], 
         from_page["description"], from_page["age_range"], from_page["gender"]))
     return "Added to Role"
 
