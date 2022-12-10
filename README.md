@@ -12,9 +12,11 @@ Directors can view applications made to their projects, as well as be able to cr
 
 Finally, System admins can create and update actor's accounts.
 
-## Screenshots
+## AppSmith Walk-through 
 
+[Open Acting Part 1](https://youtu.be/z-4z2cItEbs)
 
+[Open Acting Part 2](https://youtu.be/Gqt3OgO1GW4)
 
 ## How to setup and start the containers
 **Important** - you need Docker Desktop installed
