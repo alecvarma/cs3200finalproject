@@ -39,6 +39,7 @@ def post_projects():
     cursor.execute('insert into Project (title, type, cast, country, genre, status, duration, dir_id, proj_release_date) \
         values (%s,%s,%s,%s,%s,%s,%s,%s,%s)', (from_page["title"],from_page["type"],from_page["cast"], 
         from_page["country"], from_page["genre"], from_page["status"], from_page["duration"], from_page["dir_id"], from_page["proj_release_date"]))
+    db.get_db().commit()
     return "Added to Projects"
 
 # POST Roles
@@ -49,6 +50,7 @@ def post_role():
     cursor.execute('insert into Role (projectid,role_type,char_name,description,age_range,gender) \
         values (%s,%s,%s,%s,%s,%s)', (from_page["projectid"],from_page["role_type"],from_page["char_name"], 
         from_page["description"], from_page["age_range"], from_page["gender"]))
+    db.get_db().commit()
     return "Added to Role"
 
 # POST Reviews
@@ -58,6 +60,7 @@ def post_review():
     cursor = db.get_db().cursor()
     cursor.execute('insert into Reviews (description,rating,actor_id,dir_id) \
         values (%s,%s,%s,%s)', (from_page["description"],from_page["rating"],from_page["actor_id"],from_page["dir_id"]))
+    db.get_db().commit()
     return "Added to Reviews"
 
 
