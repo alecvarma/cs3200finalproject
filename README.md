@@ -1,8 +1,20 @@
-# MySQL + Flask Boilerplate Project
+# OpenActing
 
-This repo contains a boilerplate setup for spinning up 2 docker containers: 
-1. A MySQL 8 container for obvious reasons
-1. A Python Flask container to implement a REST API
+This github repo is the codebase for the OpenActing project. This was made by Alec Varma and Brandon Hampstead as the final project for our CS3200: Database Design class. The project is built using Flask REST APIs in a Docker container, with a frontend implemented on our professor's AppSmith server (https://appsmith.cs3200.net/app/openacting/open-roles-638baa9d5bc9880dbcb1dd33). If the link is not responsive, it means that the AppSmith server has been turned off.
+
+## Overview
+
+Our project, OpenActing, serves as an application where actors or directors can find projects to work on together. 
+
+Actors can view and apply to open projects. Actors can also look at their profile, and see their reviews and outgoing applications.
+
+Directors can view applications made to their projects, as well as be able to create new projects, write new reviews, or make new roles for their projects.
+
+Finally, System admins can create and update actor's accounts.
+
+## Screenshots
+
+
 
 ## How to setup and start the containers
 **Important** - you need Docker Desktop installed
@@ -14,11 +26,7 @@ This repo contains a boilerplate setup for spinning up 2 docker containers:
 1. Build the images with `docker compose build`
 1. Start the containers with `docker compose up`.  To run in detached mode, run `docker compose up -d`. 
 
-## For setting up a Conda Web-Dev environment:
 
-1. `conda create -n webdev python=3.9`
-1. `conda activate webdev`
-1. `pip install flask flask-mysql flask-restful cryptography flask-login`
 
 
 
