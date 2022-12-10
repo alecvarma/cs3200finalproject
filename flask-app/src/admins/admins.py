@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, make_response
+from flask import Blueprint, request, jsonify, make_response, current_app
 import json
 from src import db
 
@@ -36,12 +36,13 @@ def get_actors():
 def post_new_actor():
     from_page = request.form
     cursor = db.get_db().cursor()
+    current_app.logger.info(from_page['dob'][:10])
     query = '''
         INSERT INTO Actor (first_name,last_name,DOB, admin_id)
-        values (%s, %s %s, %s)
+        values (%s, %s, %s, %s)
     '''
-    cursor.execute(query, (from_page['f_name'], from_page['l_name'], from_page['dob'], from_page['admin_id']))
-
+    cursor.execute(query, (from_page['f_name'], from_page['l_name'], from_page['dob'][:10], from_page['admin_id']))
+    db.get_db().commit()
     return f'Actor: {from_page["f_name"]} {from_page["l_name"]} added by Admin Id : {from_page["admin_id"]}'
 
 # updates an actor
@@ -49,8 +50,11 @@ def post_new_actor():
 def update_actor(actorId):
     from_page = request.form
     cursor = db.get_db().cursor()
-    query = 'INSERT INTO Actor (first_name,last_name,DOB, admin_id) values (%s, %s %s, %s) where actor_id = {0}'.format(actorId)
+    query = 'UPDATE Actor \
+        SET first_name = %s, last_name = %s,DOB = %s, admin_id = %s \
+            where actor_id = {0}'.format(actorId)
     
     cursor.execute(query, (from_page['f_name'], from_page['l_name'], from_page['dob'], from_page['admin_id']))
+    db.get_db().commit()
 
     return f'Actor: {from_page["f_name"]} {from_page["l_name"]} updated by Admin Id : {from_page["admin_id"]}'

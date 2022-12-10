@@ -30,7 +30,7 @@ def get_applications(actorID):
     #project_id, role_id, actor_id, resume, status
     cursor.execute('select p.title, r.char_name, a.submit_time \
         from Application a join Role r on a.role_id = r.role_id  \
-            join Project p on p.p_id = a.projectid where a.status = "true" and actor_id = {0}'.format(actorID))
+            join Project p on p.p_id = a.projectid where a.status is true and actor_id = {0}'.format(actorID))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -55,6 +55,7 @@ def post_application():
     #     values (%s,%s,%s,%s, true, %s', (from_page["projectId"],from_page["role_id"],from_page["actor_id"],from_page["resume"], dt_string))
     cursor.execute('insert into Application (projectid, role_id, actor_id, resume, status, submit_time) \
         values (%s,%s,%s,%s,true,%s)', (from_page["projectId"],from_page["role_id"],from_page["actor_id"],from_page["resume"], dt_string))
+    db.get_db().commit()
     return f"Applied to Role"
 
 # Get reviews for an actor with a particular actor_id
